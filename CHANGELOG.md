@@ -28,15 +28,6 @@
  - 'sby-limotelu'
  - 'scaleway-ams'
  - 'scaleway-fr'
- - 'serbica'
- - 'techsaviours.org-dnscrypt'
- - 'v.dnscrypt.uk-ipv4'
- - 'a-and-a'
- - 'adguard-dns'
- - 'dnsforfamily-no-safe-search'
- - 'dnscry.pt-portland-ipv4'
- - 'doh.tiarap.org'
- - 'dnsforfamily-no-safe-search'
 
 
 ## 2.1.11-1 (23/05/2025)
