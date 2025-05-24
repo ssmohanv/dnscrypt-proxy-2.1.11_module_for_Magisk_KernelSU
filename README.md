@@ -1,4 +1,4 @@
-# dnscrypt-proxy-2.1.11 or Magisk / KernelSU
+# dnscrypt-proxy-2.1.11 for Magisk / KernelSU
 - This module is created based on the latest DNSCrypt 2.1.11. 
 - Sources: https://github.com/DNSCrypt/dnscrypt-proxy/releases
 - This module works both with Magisk and KernelSU.
