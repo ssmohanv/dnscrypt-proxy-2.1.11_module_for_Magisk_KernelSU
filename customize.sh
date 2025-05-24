@@ -3,7 +3,7 @@
   ui_print "*   dnscrypt-proxy-android   *"
   ui_print "*            2.1.11          *"
   ui_print "******************************"
-  ui_print "*         Mohan              *"
+  ui_print "*         M0H4N              *"
   ui_print "******************************"
   ui_print " "
 
