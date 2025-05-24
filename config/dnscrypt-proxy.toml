@@ -28,7 +28,7 @@
 ##
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-server_names = ['cloudflare', 'google', 'quad9-dnscrypt-ip4-filter-pri', 'd0wn-random', 'ams-dnscrypt-nl', 'd0wn-tz-ns1', 'dct-at1', 'dct-nl1', 'dct-ru1', 'dnscrypt.be', 'dnscrypt.ca-1', 'dnscrypt.ca-2', 'dnscrypt.pl', 'dnscrypt.uk-ipv4', 'dnswarden-uncensor-dc-swiss', 'meganerd', 'openinternet', 'plan9dns-fl', 'plan9dns-mx', 'plan9dns-nj', 'pryv8boi', 'sby-limotelu', 'scaleway-ams', 'scaleway-fr', 'serbica', 'techsaviours.org-dnscrypt', 'v.dnscrypt.uk-ipv4']
+server_names = ['cloudflare-family', 'cloudflare-security', 'google', 'quad9-dnscrypt-ip4-filter-pri', 'd0wn-random', 'ams-dnscrypt-nl', 'd0wn-tz-ns1', 'dct-at1', 'dct-nl1', 'dct-ru1', 'dnscrypt.be', 'dnscrypt.ca-1', 'dnscrypt.ca-2', 'dnscrypt.pl', 'dnscrypt.uk-ipv4', 'dnswarden-uncensor-dc-swiss', 'meganerd', 'openinternet', 'plan9dns-fl', 'plan9dns-mx', 'plan9dns-nj', 'pryv8boi', 'sby-limotelu', 'scaleway-ams', 'scaleway-fr', 'serbica', 'techsaviours.org-dnscrypt', 'v.dnscrypt.uk-ipv4', 'a-and-a', 'adguard-dns', 'dnsforfamily-no-safe-search', 'dnscry.pt-portland-ipv4', 'doh.tiarap.org', 'cloudflare', 'dnsforfamily-no-safe-search']
 
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
