@@ -1,8 +1,45 @@
 # Changelog
 
-## unreleased
+## 2.1.11-2 (24/05/2025)
+### Enabled DNSSEC validation and more servers added (list of servers)
+ - 'cloudflare-family'
+ - 'cloudflare-security'
+ - 'cloudflare'
+ - 'google'
+ - 'quad9-dnscrypt-ip4-filter-pri'
+ - 'd0wn-random'
+ - 'ams-dnscrypt-nl'
+ - 'd0wn-tz-ns1'
+ - 'dct-at1'
+ - 'dct-nl1'
+ - 'dct-ru1'
+ - 'dnscrypt.be'
+ - 'dnscrypt.ca-1'
+ - 'dnscrypt.ca-2'
+ - 'dnscrypt.pl'
+ - 'dnscrypt.uk-ipv4'
+ - 'dnswarden-uncensor-dc-swiss'
+ - 'meganerd'
+ - 'openinternet'
+ - 'plan9dns-fl'
+ - 'plan9dns-mx'
+ - 'plan9dns-nj'
+ - 'pryv8boi'
+ - 'sby-limotelu'
+ - 'scaleway-ams'
+ - 'scaleway-fr'
+ - 'serbica'
+ - 'techsaviours.org-dnscrypt'
+ - 'v.dnscrypt.uk-ipv4'
+ - 'a-and-a'
+ - 'adguard-dns'
+ - 'dnsforfamily-no-safe-search'
+ - 'dnscry.pt-portland-ipv4'
+ - 'doh.tiarap.org'
+ - 'dnsforfamily-no-safe-search'
 
-## 2.1.11
+
+## 2.1.11-1 (23/05/2025)
 ### Upstream
  - DNS traffic encryption and authentication. Supports DNS-over-HTTPS (DoH) using TLS 1.3 and QUIC, DNSCrypt, Anonymized DNS and ODoH
  - Client IP addresses can be hidden using Tor, SOCKS proxies or Anonymized DNS relays
