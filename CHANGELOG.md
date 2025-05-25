@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.1.11-2 (24/05/2025)
+## 2.1.11-1 (24/05/2025)
 ### Enabled DNSSEC validation and more servers added (list of servers)
  - 'cloudflare-family'
  - 'cloudflare-security'
