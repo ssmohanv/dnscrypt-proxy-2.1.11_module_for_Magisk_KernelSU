@@ -1,33 +1,21 @@
 # Changelog
 
-## 2.1.11-1 (24/05/2025)
+## 2.1.11-2 (24/05/2025)
 ### Enabled DNSSEC validation and more servers added (list of servers)
- - 'cloudflare-family'
- - 'cloudflare-security'
- - 'cloudflare'
- - 'google'
- - 'quad9-dnscrypt-ip4-filter-pri'
- - 'd0wn-random'
- - 'ams-dnscrypt-nl'
- - 'd0wn-tz-ns1'
- - 'dct-at1'
- - 'dct-nl1'
- - 'dct-ru1'
- - 'dnscrypt.be'
- - 'dnscrypt.ca-1'
- - 'dnscrypt.ca-2'
- - 'dnscrypt.pl'
- - 'dnscrypt.uk-ipv4'
- - 'dnswarden-uncensor-dc-swiss'
- - 'meganerd'
- - 'openinternet'
- - 'plan9dns-fl'
- - 'plan9dns-mx'
- - 'plan9dns-nj'
- - 'pryv8boi'
- - 'sby-limotelu'
- - 'scaleway-ams'
- - 'scaleway-fr'
+    'cloudflare',                     # General Cloudflare DNS (1.1.1.1) - supports DNSSEC, DoH, DoT
+    'google',                         # Google Public DNS (8.8.8.8) - supports DNSSEC, DoH, DoT
+    'quad9-dnscrypt-ip4-filter-pri',  # Quad9 (9.9.9.9) - security-focused, DNSSEC, DoH, DoT, DNSCrypt
+    'adguard-dns',                    # AdGuard DNS - offers blocking, supports DNSSEC, DoH, DoT
+    'cloudflare-family',              # Cloudflare Family (malware/adult blocking) - DNSSEC
+    'cloudflare-security',            # Cloudflare Security (malware blocking) - DNSSEC
+    'dnscrypt.eu-nl',                 # A well-known DNSCrypt server, often listed with good privacy
+    'dnscrypt.ca-1',                  # Canadian DNSCrypt server
+    'dnscrypt.uk-ipv4',               # UK based DNSCrypt server
+    'meganerd',                       # Another well-regarded DNSCrypt server
+    'openinternet',                   # Often a non-logging, unfiltered option
+    'scaleway-ams',                   # Scaleway (Amsterdam) - often fast and private
+    'techsaviours.org-dnscrypt',      # TechSaviours, often good for privacy/security
+
 
 
 ## 2.1.11-1 (23/05/2025)
