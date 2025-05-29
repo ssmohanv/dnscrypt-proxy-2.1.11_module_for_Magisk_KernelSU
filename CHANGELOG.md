@@ -7,6 +7,14 @@
 
    Anyone having the issue explained above, flash dnscrypt-redirect-v1.zip after flashing the dnscrypt-proxy module.
 
+## 2.1.11-3 (29/05/2025)
+ - A new Weighted Power of Two (wp2) load balancing strategy has been implemented as the default, providing improved distribution across resolvers.
+ - An optional Prometheus metrics endpoint has been added for monitoring and observability.
+Memory usage for the cache has been reduced.
+ - The monitoring dashboard has received significant improvements including better security, performance optimizations, WebSocket rate limiting, and HTTP caching headers.
+ - The monitoring UI has been refined with stable sorting to prevent flickering, query type limitations, and improved scrolling behavior.
+ - Additional records in queries are now properly removed before forwarding.   
+
 ## 2.1.11-2 (24/05/2025)
 ### Enabled DNSSEC validation and more servers added (list of servers)
     'cloudflare',                     # General Cloudflare DNS (1.1.1.1) - supports DNSSEC, DoH, DoT
