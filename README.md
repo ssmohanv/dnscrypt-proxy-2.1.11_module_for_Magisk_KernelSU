@@ -1,9 +1,17 @@
 # dnscrypt-proxy-2.1.11 for Magisk / KernelSU
-- This module is created based on the latest DNSCrypt 2.1.11. 
-- Sources: https://github.com/DNSCrypt/dnscrypt-proxy/releases
+- This module is created based on the latest DNSCrypt 2.1.12 
+- Sources: https://github.com/dnscrypt/dnscrypt-proxy/releases?utm_source=perplexity
 - This module works both with Magisk and KernelSU.
 
-## This module is based on DNScrypt release 2.1.11.
+## This module is based on DNScrypt release 2.1.12
+
+## 2.1.12-1 (29/05/2025)
+ - A new Weighted Power of Two (wp2) load balancing strategy has been implemented as the default, providing improved distribution across resolvers.
+ - An optional Prometheus metrics endpoint has been added for monitoring and observability.
+Memory usage for the cache has been reduced.
+ - The monitoring dashboard has received significant improvements including better security, performance optimizations, WebSocket rate limiting, and HTTP caching headers.
+ - The monitoring UI has been refined with stable sorting to prevent flickering, query type limitations, and improved scrolling behavior.
+ - Additional records in queries are now properly removed before forwarding.  
 
 ## Features:
 - DNS traffic encryption and authentication. Supports DNS-over-HTTPS (DoH) using TLS 1.3 and QUIC, DNSCrypt, Anonymized DNS and - ODoH
