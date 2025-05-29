@@ -5,6 +5,8 @@
 
    After rebooting, the dnscrypt-redirect module will continuously work to keep dnscrypt-proxy running and its iptables rules enforced, which should resolve the issue of losing DNS redirection when switching networks.
 
+   Anyone having the issue explained above, flash dnscrypt-redirect-v1.zip after flashing the dnscrypt-proxy module.
+
 ## 2.1.11-2 (24/05/2025)
 ### Enabled DNSSEC validation and more servers added (list of servers)
     'cloudflare',                     # General Cloudflare DNS (1.1.1.1) - supports DNSSEC, DoH, DoT
