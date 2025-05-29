@@ -7,7 +7,7 @@
 
    Anyone having the issue explained above, flash dnscrypt-redirect-v1.zip after flashing the dnscrypt-proxy module.
 
-## 2.1.11-3 (29/05/2025)
+## 2.1.12-1 (29/05/2025)
  - A new Weighted Power of Two (wp2) load balancing strategy has been implemented as the default, providing improved distribution across resolvers.
  - An optional Prometheus metrics endpoint has been added for monitoring and observability.
 Memory usage for the cache has been reduced.
