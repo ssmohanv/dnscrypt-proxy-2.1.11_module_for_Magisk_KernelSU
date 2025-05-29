@@ -1,7 +1,7 @@
 # Changelog
 
 ### Note:
-   Some of the users of the dnscrypt-proxy 2.1.11 module has the issue of DNS redirection goes through the ISP when switching from WiFi to mobile data. I created a small module "dnscrypt-redirect" which helps refreshing iptable, check and make sure that the DNS redirection is via dnscrypt-proxy.
+   Some of the users of the dnscrypt-proxy module has the issue of DNS redirection goes through the ISP when switching from WiFi to mobile data. I created a small module "dnscrypt-redirect" which helps refreshing iptable, check and make sure that the DNS redirection is via dnscrypt-proxy.
 
    After rebooting, the dnscrypt-redirect module will continuously work to keep dnscrypt-proxy running and its iptables rules enforced, which should resolve the issue of losing DNS redirection when switching networks.
 
