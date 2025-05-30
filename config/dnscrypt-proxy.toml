@@ -41,16 +41,23 @@ server_names = [
     'meganerd',                       # Another well-regarded DNSCrypt server
     'openinternet',                   # Often a non-logging, unfiltered option
     'scaleway-ams',                   # Scaleway (Amsterdam) - often fast and private
-    'techsaviours.org-dnscrypt',      # TechSaviours, often good for privacy/security
+    'techsaviours.org-dnscrypt',      # TechSaviours, often good for privacy/security	
+	'quad9-doh',  					## Quad9, focuses on blocking malware/phishing, supports DoH
+	'adguard-doh',					## AdGuard, offers ad/tracker blocking via DNS over DoH
+	'cleanbrowsing-family-doh',		## CleanBrowse Family, offers filtering over DoH
+	'securedns-doh',          		## Secure DNS - Netherlands, often good privacy
+	'mozilla-cloudflare',     		## Cloudflare, specific server for Firefox, may have slightly different routing/privacy
+	'power-doh',              		## PowerDNS, located in NL, no logging
+	'dnsoverhttps-doh',      		## dnsoverhttps.net, non-logging, non-filtering, in Germany
 ]
 
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
 ## Example with both IPv4 and IPv6:
-## listen_addresses = ['127.0.0.1:5354', '[::1]:5354']
+## listen_addresses = ['127.0.0.1:53', '[::1]:53']
 ##
-## To listen to all IPv4 addresses, use `listen_addresses = ['0.0.0.0:5354']`
-## To listen to all IPv4+IPv6 addresses, use `listen_addresses = ['[::]:5354']`
+## To listen to all IPv4 addresses, use `listen_addresses = ['0.0.0.0:53']`
+## To listen to all IPv4+IPv6 addresses, use `listen_addresses = ['[::]:53']`
 
 listen_addresses = ['127.0.0.1:5354']
 
@@ -95,7 +102,7 @@ require_dnssec = true
 require_nolog = true
 
 # Server must not enforce its own blocklist (for parental control, ads blocking...)
-require_nofilter = true
+require_nofilter = false
 
 # Server names to avoid even if they match all criteria
 disabled_server_names = []
@@ -274,7 +281,8 @@ dnscrypt_ephemeral_keys = true
 ## not be sent there. If you're using DNSCrypt or Anonymized DNS and your
 ## lists are up to date, these resolvers will not even be used.
 
-bootstrap_resolvers = ['45.11.45.11:53']
+# bootstrap_resolvers = ['45.11.45.11:53'] > changed as below
+bootstrap_resolvers = ['1.1.1.1:53', '8.8.8.8:53'] # <--- RECOMMENDED CHANGE
 
 
 ## When internal DNS resolution is required, for example to retrieve
@@ -310,7 +318,8 @@ netprobe_timeout = -1
 ## On other operating systems, the connection will be initialized
 ## but nothing will be sent at all.
 
-netprobe_address = '45.11.45.11:53'
+# netprobe_address = '45.11.45.11:53' > changed as below
+netprobe_address = '1.1.1.1:53' # <--- RECOMMENDED CHANGE
 
 
 ## Offline mode - Do not use any remote encrypted servers.
@@ -670,4 +679,262 @@ allowed_ips_file = 'allowed-ips.txt'
 ## would block access to YouTube during the times defined by the 'time-to-sleep' schedule.
 ##
 ## {after='21:00', before= '7:00'} matches 0:00-7:00 and 21:00-0:00
-## {aft
+## {after= '9:00', before='18:00'} matches 9:00-18:00
+
+[schedules]
+
+  # [schedules.time-to-sleep]
+  #   mon = [{after='21:00', before='7:00'}]
+  #   tue = [{after='21:00', before='7:00'}]
+  #   wed = [{after='21:00', before='7:00'}]
+  #   thu = [{after='21:00', before='7:00'}]
+  #   fri = [{after='23:00', before='7:00'}]
+  #   sat = [{after='23:00', before='7:00'}]
+  #   sun = [{after='21:00', before='7:00'}]
+
+  # [schedules.work]
+  #   mon = [{after='9:00', before='18:00'}]
+  #   tue = [{after='9:00', before='18:00'}]
+  #   wed = [{after='9:00', before='18:00'}]
+  #   thu = [{after='9:00', before='18:00'}]
+  #   fri = [{after='9:00', before='17:00'}]
+
+
+
+#########################
+#        Servers        #
+#########################
+
+## Remote lists of available servers
+## Multiple sources can be used simultaneously, but every source
+## requires a dedicated cache file.
+##
+## Refer to the documentation for URLs of public sources.
+##
+## A prefix can be prepended to server names in order to
+## avoid collisions if different sources share the same for
+## different servers. In that case, names listed in `server_names`
+## must include the prefixes.
+##
+## If the `urls` property is missing, cache files and valid signatures
+## must already be present. This doesn't prevent these cache files from
+## expiring after `refresh_delay` hours.
+## `refreshed_delay` must be in the [24..168] interval.
+## The minimum delay of 24 hours (1 day) avoids unnecessary requests to servers.
+## The maximum delay of 168 hours (1 week) ensures cache freshness.
+
+[sources]
+
+  ### An example of a remote source from https://github.com/DNSCrypt/dnscrypt-resolvers
+
+  [sources.public-resolvers]
+    urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md', 'https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md']
+    cache_file = 'public-resolvers.md'
+    minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+    refresh_delay = 72
+    prefix = ''
+
+  ### Anonymized DNS relays
+
+  [sources.relays]
+    urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/relays.md', 'https://download.dnscrypt.info/resolvers-list/v3/relays.md']
+    cache_file = 'relays.md'
+    minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+    refresh_delay = 72
+    prefix = ''
+
+  ### ODoH (Oblivious DoH) servers and relays
+
+  # [sources.odoh-servers]
+  #   urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/odoh-servers.md', 'https://download.dnscrypt.info/resolvers-list/v3/odoh-servers.md']
+  #   cache_file = 'odoh-servers.md'
+  #   minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+  #   refresh_delay = 24
+  #   prefix = ''
+  # [sources.odoh-relays]
+  #   urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/odoh-relays.md', 'https://download.dnscrypt.info/resolvers-list/v3/odoh-relays.md']
+  #   cache_file = 'odoh-relays.md'
+  #   minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+  #   refresh_delay = 24
+  #   prefix = ''
+
+  ### Quad9
+
+  # [sources.quad9-resolvers]
+  #   urls = ['https://www.quad9.net/quad9-resolvers.md']
+  #   minisign_key = 'RWQBphd2+f6eiAqBsvDZEBXBGHQBJfeG6G+wJPPKxCZMoEQYpmoysKUN'
+  #   cache_file = 'quad9-resolvers.md'
+  #   prefix = 'quad9-'
+
+  ### Another example source, with resolvers censoring some websites not appropriate for children
+  ### This is a subset of the `public-resolvers` list, so enabling both is useless
+
+  # [sources.parental-control]
+  #   urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/parental-control.md', 'https://download.dnscrypt.info/resolvers-list/v3/parental-control.md']
+  #   cache_file = 'parental-control.md'
+  #   minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+
+
+
+#########################################
+#        Servers with known bugs        #
+#########################################
+
+[broken_implementations]
+
+## Cisco servers currently cannot handle queries larger than 1472 bytes, and don't
+## truncate responses larger than questions as expected by the DNSCrypt protocol.
+## This prevents large responses from being received over UDP and over relays.
+##
+## Older versions of the `dnsdist` server software had a bug with queries larger
+## than 1500 bytes. This is fixed since `dnsdist` version 1.5.0, but
+## some server may still run an outdated version.
+##
+## The list below enables workarounds to make non-relayed usage more reliable
+## until the servers are fixed.
+
+fragments_blocked = ['cisco', 'cisco-ipv6', 'cisco-familyshield', 'cisco-familyshield-ipv6', 'cleanbrowsing-adult', 'cleanbrowsing-adult-ipv6', 'cleanbrowsing-family', 'cleanbrowsing-family-ipv6', 'cleanbrowsing-security', 'cleanbrowsing-security-ipv6']
+
+
+
+#################################################################
+#        Certificate-based client authentication for DoH        #
+#################################################################
+
+## Use a X509 certificate to authenticate yourself when connecting to DoH servers.
+## This is only useful if you are operating your own, private DoH server(s).
+## 'creds' maps servers to certificates, and supports multiple entries.
+## If you are not using the standard root CA, an optional "root_ca"
+## property set to the path to a root CRT file can be added to a server entry.
+
+[doh_client_x509_auth]
+
+# creds = [
+#    { server_name='*', client_cert='client.crt', client_key='client.key' }
+# ]
+
+
+
+################################
+#        Anonymized DNS        #
+################################
+
+[anonymized_dns]
+
+## Routes are indirect ways to reach DNSCrypt servers.
+##
+## A route maps a server name ("server_name") to one or more relays that will be
+## used to connect to that server.
+##
+## A relay can be specified as a DNS Stamp (either a relay stamp, or a
+## DNSCrypt stamp) or a server name.
+##
+## The following example routes "example-server-1" via `anon-example-1` or `anon-example-2`,
+## and "example-server-2" via the relay whose relay DNS stamp is
+## "sdns://gRIxMzcuNzQuMjIzLjIzNDo0NDM".
+##
+## !!! THESE ARE JUST EXAMPLES !!!
+##
+## Review the list of available relays from the "relays.md" file, and, for each
+## server you want to use, define the relays you want connections to go through.
+##
+## Carefully choose relays and servers so that they are run by different entities.
+##
+## "server_name" can also be set to "*" to define a default route, for all servers:
+## { server_name='*', via=['anon-example-1', 'anon-example-2'] }
+##
+## If a route is ["*"], the proxy automatically picks a relay on a distinct network.
+## { server_name='*', via=['*'] } is also an option, but is likely to be suboptimal.
+##
+## Manual selection is always recommended over automatic selection, so that you can
+## select (relay,server) pairs that work well and fit your own criteria (close by or
+## in different countries, operated by different entities, on distinct ISPs...)
+
+ routes = [
+    { server_name='ams-dnscrypt-nl', via=['anon-meganerd', 'anon-scaleway-ams'] },
+    { server_name='d0wn-tz-ns1', via=['anon-arapurayil-in-ipv4', 'anon-cs-rome'] },
+    { server_name='dct-at1', via=['anon-cs-austria', 'anon-techsaviours.org'] },
+    { server_name='dct-nl1', via=['anon-meganerd', 'anon-scaleway-ams'] },
+    { server_name='dct-ru1', via=['anon-cs-czech', 'anon-techsaviours.org'] },
+    { server_name='dnscrypt.be', via=['anon-cs-belgium', 'anon-serbica'] },
+    { server_name='dnscrypt.ca-1', via=['anon-cs-il', 'anon-openinternet'] },
+    { server_name='dnscrypt.ca-2', via=['anon-cs-il2', 'anon-openinternet'] },
+    { server_name='dnscrypt.pl', via=['anon-cs-poland', 'anon-techsaviours.org'] },
+    { server_name='dnscrypt.uk-ipv4', via=['anon-cs-london', 'anon-scaleway'] },
+    { server_name='dnswarden-uncensor-dc-swiss', via=['anon-cs-fr', 'anon-kama'] },
+    { server_name='meganerd', via=['anon-scaleway-ams', 'anon-serbica'] },
+    { server_name='openinternet', via=['anon-cs-sea', 'anon-inconnu'] },
+    { server_name='plan9dns-fl', via=['anon-cs-tx', 'anon-inconnu'] },
+    { server_name='plan9dns-mx', via=['anon-cs-tx', 'anon-inconnu'] },
+    { server_name='plan9dns-nj', via=['anon-cs-nyc1', 'anon-inconnu'] },
+    { server_name='pryv8boi', via=['anon-cs-dus1', 'anon-techsaviours.org'] },
+    { server_name='sby-limotelu', via=['anon-cs-sydney', 'anon-saldns01-conoha-ipv4'] },
+    { server_name='scaleway-ams', via=['anon-meganerd', 'anon-serbica'] },
+    { server_name='scaleway-fr', via=['anon-cs-fr', 'anon-dnscrypt.uk-ipv4'] },
+    { server_name='serbica', via=['anon-cs-nl', 'anon-scaleway-ams'] },
+    { server_name='techsaviours.org-dnscrypt', via=['anon-cs-berlin', 'anon-dnswarden-swiss'] },
+    { server_name='v.dnscrypt.uk-ipv4', via=['anon-cs-london', 'anon-scaleway'] }
+#    { server_name='example-server-1', via=['anon-example-1', 'anon-example-2'] },
+#    { server_name='example-server-2', via=['sdns://gRIxMzcuNzQuMjIzLjIzNDo0NDM'] }
+ ]
+
+
+## Skip resolvers incompatible with anonymization instead of using them directly
+
+skip_incompatible = true
+
+
+## If public server certificates for a non-conformant server cannot be
+## retrieved via a relay, try getting them directly. Actual queries
+## will then always go through relays.
+
+direct_cert_fallback = false
+
+
+
+###############################
+#            DNS64            #
+###############################
+
+## DNS64 is a mechanism for synthesizing AAAA records from A records.
+## It is used with an IPv6/IPv4 translator to enable client-server
+## communication between an IPv6-only client and an IPv4-only server,
+## without requiring any changes to either the IPv6 or the IPv4 node,
+## for the class of applications that work through NATs.
+##
+## There are two options to synthesize such records:
+## Option 1: Using a set of static IPv6 prefixes;
+## Option 2: By discovering the IPv6 prefix from DNS64-enabled resolver.
+##
+## If both options are configured - only static prefixes are used.
+## (Ref. RFC6147, RFC6052, RFC7050)
+##
+## Do not enable unless you know what DNS64 is and why you need it, or else
+## you won't be able to connect to anything at all.
+
+[dns64]
+
+## Static prefix(es) as Pref64::/n CIDRs
+
+# prefix = ['64:ff9b::/96']
+
+## DNS64-enabled resolver(s) to discover Pref64::/n CIDRs
+## These resolvers are used to query for Well-Known IPv4-only Name (WKN) "ipv4only.arpa." to discover only.
+## Set with your ISP's resolvers in case of custom prefixes (other than Well-Known Prefix 64:ff9b::/96).
+## IMPORTANT: Default resolvers listed below support Well-Known Prefix 64:ff9b::/96 only.
+
+# resolver = ['[2606:4700:4700::64]:53', '[2001:4860:4860::64]:53']
+
+
+
+########################################
+#            Static entries            #
+########################################
+
+## Optional, local, static list of additional servers
+## Mostly useful for testing your own servers.
+
+[static]
+
+  # [static.myserver]
+  #   stamp = 'sdns://AQcAAAAAAAAAAAAQMi5kbnNjcnlwdC1jZXJ0Lg'
